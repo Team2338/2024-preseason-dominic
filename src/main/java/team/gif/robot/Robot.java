@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
+import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.drivers.Pigeon;
 
 /**
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
   public static UiSmartDashboard uiSmartDashboard;
 
   public static final boolean enableSwerveDebug = false;
+  public static Drivetrain driveTrain;
 
   /**
    * This function is run when the robot is first started up and should be used for any
