@@ -9,7 +9,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
+import team.gif.robot.commands.ArcadeDrive;
+import team.gif.robot.commands.TankDrive;
+import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.Drivetrain;
+import team.gif.robot.subsystems.Indexer;
+import team.gif.robot.subsystems.Shooter;
 import team.gif.robot.subsystems.drivers.Pigeon;
 
 /**
@@ -31,6 +36,12 @@ public class Robot extends TimedRobot {
 
   public static final boolean enableSwerveDebug = false;
   public static Drivetrain driveTrain;
+  public static Collector collector;
+  public static Indexer indexer;
+  public static Shooter shooter;
+
+
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -41,8 +52,17 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
-    oi = new OI();
+
     uiSmartDashboard = new UiSmartDashboard();
+    driveTrain = new Drivetrain();
+    driveTrain.setDefaultCommand(new TankDrive());
+    //driveTrain.setDefaultCommand(new ArcadeDrive());
+    collector= new Collector();
+    indexer= new Indexer();
+    shooter = new Shooter();
+
+    oi = new OI();
+
 
   }
 

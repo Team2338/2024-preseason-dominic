@@ -1,13 +1,14 @@
 package team.gif.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
-public class TankDrive extends Command {
+public class CollectorTurn extends Command {
 
-    public TankDrive() {
+    public CollectorTurn() {
         super();
-        addRequirements(Robot.driveTrain); // uncomment
+        addRequirements(Robot.collector); // uncomment
     }
 
     // Called when the command is initially scheduled.
@@ -17,11 +18,7 @@ public class TankDrive extends Command {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        double rightPos = -Robot.oi.driver.getRightY();
-        double leftPos = -Robot.oi.driver.getLeftY();
-
-        Robot.driveTrain.driveTank(leftPos, rightPos);
-    }
+        Robot.collector.moveMotor(Constants.COLLECTOR_SPEED_PERCENT);}
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
@@ -32,8 +29,9 @@ public class TankDrive extends Command {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-
-        Robot.driveTrain.driveTank(0, 0);
+        Robot.collector.moveMotor(0);
 
     }
+
 }
+

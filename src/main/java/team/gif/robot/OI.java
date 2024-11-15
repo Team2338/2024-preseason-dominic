@@ -2,6 +2,10 @@ package team.gif.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import team.gif.robot.commands.CollectorTurn;
+import team.gif.robot.commands.IndexerTurn;
+import team.gif.robot.commands.ShooterTurn;
+
 public class OI {
     /*
      * Instantiate all joysticks/controllers and their buttons here
@@ -85,6 +89,15 @@ public class OI {
          * Simple Test:
          *   aX.onTrue(new PrintCommand("aX"));
          */
+
+        //todo: Change
+        dA.whileTrue(new CollectorTurn());
+        dA.whileTrue(new IndexerTurn());
+
+        dX.whileTrue(new IndexerTurn());
+        dY.whileTrue(new ShooterTurn());
+
+
 
 
 
