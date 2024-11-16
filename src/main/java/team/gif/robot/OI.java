@@ -90,12 +90,27 @@ public class OI {
          *   aX.onTrue(new PrintCommand("aX"));
          */
 
-        //todo: Change
-        dA.whileTrue(new CollectorTurn());
-        dA.whileTrue(new IndexerTurn());
+        //driver
+        dRTrigger.whileTrue(new CollectorTurn());
+        dRTrigger.whileTrue(new IndexerTurn());
 
-        dX.whileTrue(new IndexerTurn());
-        dY.whileTrue(new ShooterTurn());
+        dLTrigger.whileTrue(new IndexerTurn());
+        dLTrigger.whileTrue(new ShooterTurn());
+        dY.whileTrue(new IndexerTurn());
+
+        //aux
+        aRTrigger.whileTrue(new CollectorTurn());
+        aRTrigger.whileTrue(new IndexerTurn());
+
+        aLTrigger.whileTrue(new IndexerTurn());
+        aLTrigger.whileTrue(new ShooterTurn());
+        aY.whileTrue(new IndexerTurn());
+
+
+
+
+
+
 
 
 
