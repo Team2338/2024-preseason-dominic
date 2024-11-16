@@ -17,8 +17,8 @@ public class TankDrive extends Command {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        double rightPos = Robot.oi.driver.getRightY();
-        double leftPos = Robot.oi.driver.getLeftY();
+        double rightPos = -Robot.oi.driver.getRightY();
+        double leftPos = -Robot.oi.driver.getLeftY();
 
         Robot.driveTrain.driveTank(leftPos, rightPos);
     }

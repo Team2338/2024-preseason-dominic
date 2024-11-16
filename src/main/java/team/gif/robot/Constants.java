@@ -20,7 +20,7 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
 
 //todo: change
-    public static final double COLLECTOR_SPEED_PERCENT= -.50;
+    public static final double COLLECTOR_SPEED_PERCENT= -.80;
     public static final double INDEXER_SPEED_PERCENT = -.70;
     public static final double SHOOTER_SPEED_PERCENT = -.30;
 

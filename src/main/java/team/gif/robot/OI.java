@@ -1,5 +1,7 @@
 package team.gif.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.CollectorTurn;
@@ -72,6 +74,7 @@ public class OI {
     public final Trigger tDPadLeft = test.povLeft();
 
     public OI() {
+        DriverStation.silenceJoystickConnectionWarning(true);
         /*
          *
          * Create controller actions here
@@ -105,6 +108,8 @@ public class OI {
         aLTrigger.whileTrue(new IndexerTurn());
         aLTrigger.whileTrue(new ShooterTurn());
         aY.whileTrue(new IndexerTurn());
+        //aB.onTrue(new InstantCommand(() -> Robot.pigeon.resetPigeonPosition()));
+
 
 
 

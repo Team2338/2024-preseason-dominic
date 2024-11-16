@@ -4,12 +4,14 @@
 
 package team.gif.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.ArcadeDrive;
+import team.gif.robot.commands.AutosGroup;
 import team.gif.robot.commands.TankDrive;
 import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.Drivetrain;
@@ -29,7 +31,6 @@ public class Robot extends TimedRobot {
   private static TelemetryFileLogger telemetryLogger;
   public static EventFileLogger eventLogger;
   public static OI oi;
-
   public static Pigeon pigeon;
 
   public static UiSmartDashboard uiSmartDashboard;
@@ -55,13 +56,16 @@ public class Robot extends TimedRobot {
 
     uiSmartDashboard = new UiSmartDashboard();
     driveTrain = new Drivetrain();
-    driveTrain.setDefaultCommand(new TankDrive());
-    //driveTrain.setDefaultCommand(new ArcadeDrive());
+    //driveTrain.setDefaultCommand(new TankDrive());
+    driveTrain.setDefaultCommand(new ArcadeDrive());
     collector= new Collector();
     indexer= new Indexer();
     shooter = new Shooter();
-
+    autonomousCommand= new AutosGroup();
+    pigeon = new Pigeon(new TalonSRX(RobotMap.PIGEON_ID));
+    pigeon.addToShuffleboard("Dashboard", "Heading");
     oi = new OI();
+
 
 
   }
@@ -94,7 +98,10 @@ public class Robot extends TimedRobot {
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+    System.out.println("auto init");
+    new AutosGroup().schedule();
+  }
 
   /** This function is called periodically during autonomous. */
   @Override
