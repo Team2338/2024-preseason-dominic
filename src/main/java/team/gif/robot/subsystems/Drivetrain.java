@@ -11,24 +11,27 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.RobotMap;
 
 public class Drivetrain extends SubsystemBase {
-    private WPI_TalonSRX LeftCIM;
-    private WPI_TalonSRX RightCIM;
+    private WPI_TalonSRX leftCIM;
+    private WPI_TalonSRX rightCIM;
 
     private DifferentialDrive drive;
 
 
     /** Creates a new ExampleSubsystem. */
     public Drivetrain() {
-        LeftCIM = new WPI_TalonSRX(RobotMap.LEFT_CIM);
-        RightCIM = new WPI_TalonSRX(RobotMap.RIGHT_CIM);
+        leftCIM = new WPI_TalonSRX(RobotMap.LEFT_CIM);
+        rightCIM = new WPI_TalonSRX(RobotMap.RIGHT_CIM);
 
-        LeftCIM.configFactoryDefault();
-        RightCIM.configFactoryDefault();
+        leftCIM.configFactoryDefault();
+        rightCIM.configFactoryDefault();
 
-        LeftCIM.setNeutralMode(NeutralMode.Brake);
-        RightCIM.setNeutralMode(NeutralMode.Brake);
+        leftCIM.setInverted(false);
+        rightCIM.setInverted(true);
 
-        drive = new DifferentialDrive(LeftCIM,RightCIM);
+        leftCIM.setNeutralMode(NeutralMode.Brake);
+        rightCIM.setNeutralMode(NeutralMode.Brake);
+
+        drive = new DifferentialDrive(leftCIM, rightCIM);
     }
 
     public void driveArcade(double speed, double rotation) {drive.arcadeDrive(speed, rotation);}

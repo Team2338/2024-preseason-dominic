@@ -4,12 +4,19 @@
 
 package team.gif.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
+import team.gif.robot.commands.ArcadeDrive;
+import team.gif.robot.commands.AutosGroup;
+import team.gif.robot.commands.TankDrive;
+import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.Drivetrain;
+import team.gif.robot.subsystems.Indexer;
+import team.gif.robot.subsystems.Shooter;
 import team.gif.robot.subsystems.drivers.Pigeon;
 
 /**
@@ -24,13 +31,18 @@ public class Robot extends TimedRobot {
   private static TelemetryFileLogger telemetryLogger;
   public static EventFileLogger eventLogger;
   public static OI oi;
-
   public static Pigeon pigeon;
 
   public static UiSmartDashboard uiSmartDashboard;
 
   public static final boolean enableSwerveDebug = false;
   public static Drivetrain driveTrain;
+  public static Collector collector;
+  public static Indexer indexer;
+  public static Shooter shooter;
+
+
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -41,8 +53,20 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
-    oi = new OI();
+
     uiSmartDashboard = new UiSmartDashboard();
+    driveTrain = new Drivetrain();
+    //driveTrain.setDefaultCommand(new TankDrive());
+    driveTrain.setDefaultCommand(new ArcadeDrive());
+    collector= new Collector();
+    indexer= new Indexer();
+    shooter = new Shooter();
+    autonomousCommand= new AutosGroup();
+    pigeon = new Pigeon(new TalonSRX(RobotMap.PIGEON_ID));
+    pigeon.addToShuffleboard("Dashboard", "Heading");
+    oi = new OI();
+
+
 
   }
 
@@ -74,7 +98,10 @@ public class Robot extends TimedRobot {
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+    System.out.println("auto init");
+    new AutosGroup().schedule();
+  }
 
   /** This function is called periodically during autonomous. */
   @Override
